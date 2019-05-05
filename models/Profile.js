@@ -7,11 +7,6 @@ const ProfileSchema = new Schema({
     type: Schema.Types.ObjectId, 
     ref: 'users', // referencing collection with users
   },
-  handle: { // URL user profile will live at
-    type: String,
-    required: true,
-    max: 40
-  },
   company: {
     type: String
   },
