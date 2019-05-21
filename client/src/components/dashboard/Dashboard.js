@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from 'react'
-import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import{ getCurrentProfile } from '../../actions/profile';
@@ -14,7 +15,17 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
     <p className="lead">
     {/* if the user exists, show "Welcome " {the user's name} */}
     <i className="fas fa-user"></i> Welcome { user && user.name } </p> 
-    {profile !== null ? <Fragment>has</Fragment> : <Fragment>has not</Fragment>}
+    {profile !== null ? (
+      <Fragment>
+        has
+      </Fragment>
+      ) : (
+      <Fragment>
+        <p>You have not set up a profile yet, please add some info</p>
+        <Link to='/create-profile' className="btn btn-primary my-1">
+          Create Profile
+        </Link>
+      </Fragment>)}
   </Fragment>// if the profile is null and still loading, show the spinner
 }
 
@@ -24,7 +35,7 @@ Dashboard.propTypes = {
   profile: PropTypes.object.isRequired,
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => ({ 
   auth: state.auth,
   profile: state.profile
 });
